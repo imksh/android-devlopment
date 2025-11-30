@@ -1,0 +1,38 @@
+export const webProjects = [
+  {
+    title: "Sakhi",
+    desc: "Sakhi is a real-time chatting application with features such as one-to-one messaging, push notification, online status, and secure authentication.",
+    tech: "React, JavaScript, Node.js, MongoDB",
+    img: require("../assets/images/project/sakhi.png"),
+    link: "https://imksh-sakhi.netlify.app/",
+    type: "App",
+    category: "Social",
+  },
+  {
+    title: "Threadly",
+    desc: "Threadly is a minimal social platform where users can sign up, create posts, explore public content, and connect with others.",
+    tech: "React, Spring Boot, MongoDB",
+    img: require("../assets/images/project/threadly.png"),
+    link: "https://imksh-threadly.netlify.app/",
+    type: "App",
+    category: "Social",
+  },
+  {
+    title: "CropMateAI",
+    desc: "CropMateAI is an AI-powered system that predicts the optimal harvest time for crops by analyzing climatic and soil data.",
+    tech: "React,Python and Scikit-learn,Flask",
+    img: require("../assets/images/project/cropmate.png"),
+    link: "https://cropmateai.netlify.app/",
+    type: "App",
+    category: "Productivity",
+  },
+  {
+    title: "PortFolio Website",
+    desc: "Portfolio Website showcasing my skills, projects, and professional journey. Designed to highlight creativity, experience, and passion for building impactful solutions.",
+    tech: "React, Css",
+    img: require("../assets/images/project/portfolio.png"),
+    link: "https://imksh-portfolio.netlify.app/",
+    type: "App",
+    category: "Social",
+  },
+];

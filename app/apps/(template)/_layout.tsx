@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { Tabs, Redirect } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import useThemeStore from "../../store/themeStore.ts";
+import useThemeStore from "../../../store/themeStore.ts";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const TabLayout = () => {
@@ -39,11 +39,11 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="projects"
+        name="search"
         options={{
-          title: "Projects",
+          title: "Search",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="cube" size={size} color={color} />
+            <Ionicons name="search" size={size} color={color} />
           ),
         }}
       />

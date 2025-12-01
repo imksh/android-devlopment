@@ -2,7 +2,7 @@ import { View, TouchableOpacity } from "react-native";
 import React from "react";
 import { Heading, Body, Mid } from "../components/Typography";
 import { LinearGradient } from "expo-linear-gradient";
-import useThemeStore from "../store/themeStore";
+import useThemeStore from "../../store/themeStore";
 
 export default function ConfirmationToast({
   name,

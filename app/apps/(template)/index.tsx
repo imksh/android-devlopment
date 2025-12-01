@@ -11,12 +11,12 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import HomeHeader from "../../../components/HomeHeader";
+import HomeHeader from "../../components/HomeHeader";
 import useThemeStore from "../../../store/themeStore";
-import { Heading, Body, Mid, Caption } from "../../../components/Typography";
+import { Heading, Body, Mid, Caption } from "../../components/Typography";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import AppsHeader from '../../../components/AppsHeader';
+import AppsHeader from '../../components/AppsHeader';
 
 const index = () => {
   const { colors, statusBarStyle } = useThemeStore();

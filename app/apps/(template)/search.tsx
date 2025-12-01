@@ -8,9 +8,9 @@ import {
   TextInput,
 } from "react-native";
 import { useState, useEffect } from "react";
-import { Heading, Mid, Body } from "../../../components/Typography";
+import { Heading, Mid, Body } from "../../components/Typography";
 import { LinearGradient } from "expo-linear-gradient";
-import HomeHeader from "../../../components/HomeHeader";
+import HomeHeader from "../../components/HomeHeader";
 import useThemeStore from "../../../store/themeStore";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";

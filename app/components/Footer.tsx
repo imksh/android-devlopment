@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { Caption } from "./Typography";
-import useThemeStore from "../store/themeStore";
+import useThemeStore from "../../store/themeStore";
 import LottieView from "lottie-react-native";
-import infinity1 from "../assets/animations/infinity1.json";
+import infinity1 from "../../assets/animations/infinity1.json";
 
 const Footer = () => {
   const { colors } = useThemeStore();

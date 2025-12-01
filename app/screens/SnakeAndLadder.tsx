@@ -7,24 +7,24 @@ import {
   Platform,
   KeyboardAvoidingView,
 } from "react-native";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { makeSnakeBoard } from "../../utils/makeSnakeBoard.ts";
 
 import celebrate from "../../assets/animations/celebrate.json";
-import { Heading, Mid, SubHeading, Body } from "../../components/Typography";
+import { Heading, Mid, SubHeading, Body } from "../components/Typography";
 import { Audio } from "expo-av";
 import { LinearGradient } from "expo-linear-gradient";
 import useThemeStore from "../../store/themeStore";
-import ScreenHeader from "../../components/ScreenHeader";
+import ScreenHeader from "../components/ScreenHeader";
 import LottieView from "lottie-react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { save, getData } from "../../utils/storage";
 
 const SnakeAndLadder = () => {
-  const { colors, statusBarStyle } = useThemeStore();
+  const { colors, statusBarStyle, theme, toggleTheme } = useThemeStore();
   const cells = makeSnakeBoard();
   const [dice1, setDice1] = useState(6);
   const [dice2, setDice2] = useState(6);
-  const [player1Name, setPlayer1Name] = useState("Player 1");
-  const [player2Name, setPlayer2Name] = useState("Player 2");
   const [gameStarted, setGameStarted] = useState(false);
   const [winner, setWinner] = useState("");
   const [chance, setChance] = useState(1);
@@ -33,6 +33,45 @@ const SnakeAndLadder = () => {
   const [p1, setP1] = useState(1);
   const [p2, setP2] = useState(1);
   const [six, setSix] = useState(0);
+  const [volume, setVolume] = useState(true);
+  const [data, setData] = useState({
+    dice1: 6,
+    dice2: 6,
+    gameStarted: false,
+    winner: "",
+    chance: 1,
+    p1: 1,
+    p2: 1,
+    six: 0,
+    volume: true,
+  });
+  useEffect(() => {
+    const fetchData = async () => {
+      const d = await getData("SnakeAndLadder");
+      if (!d) return;
+
+      setDice1(d.dice1);
+      setDice2(d.dice2);
+      setGameStarted(d.gameStarted);
+      setWinner(d.winner);
+      setChance(d.chance);
+      setP1(d.p1);
+      setP2(d.p2);
+      setSix(d.six);
+      setVolume(d.volume);
+      setData(d);
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const saveData = async () => {
+      await save("SnakeAndLadder", data);
+    };
+    saveData();
+  }, [data]);
+
   const diceImages = {
     1: require("../../assets/images/ludo/1.png"),
     2: require("../../assets/images/ludo/2.png"),
@@ -71,18 +110,23 @@ const SnakeAndLadder = () => {
     setTimeout(() => {
       if (chance !== 6) {
         setChance(2);
+        setData(prev => ({ ...prev, chance: 2 }));
       }
       setSpin1(false);
     }, 300);
-    playDice();
+    if (volume) playDice();
     if (six === 3) {
       setChance(2);
+      setData(prev => ({ ...prev, chance: 2 }));
       setSix(0);
+      setData(prev => ({ ...prev, six: 0 }));
       return;
     }
     const n = generate();
 
     setDice1(n);
+    setData((prev) => ({ ...prev, dice1:  n }));
+    setData((prev) => ({ ...prev, p1: prev.p1 + n }));
     for (let i = 1; i <= n; i++) {
       if (p1 === 100) break;
       setTimeout(() => {
@@ -96,15 +140,29 @@ const SnakeAndLadder = () => {
     }
 
     if (p1 + n >= 100) {
-      setWinner(player1Name);
+      setWinner("Player 1");
+      setData({
+        dice1: 6,
+        dice2: 6,
+        gameStarted: true,
+        winner: "",
+        chance: 1,
+        p1: 1,
+        p2: 1,
+        six: 0,
+        volume: data.volume,
+      });
       setGameStarted(false);
       setP1(100);
     }
     if (n !== 6) {
       setChance(2);
+      setData((prev) => ({ ...prev, chance: 2 }));
       setSix(0);
+      setData((prev) => ({ ...prev, six: 0 }));
     } else {
       setSix(six + 1);
+      setData((prev) => ({ ...prev, six: prev.six+1 }));
     }
   };
   const player2 = () => {
@@ -112,13 +170,16 @@ const SnakeAndLadder = () => {
     setTimeout(() => {
       if (chance !== 6) {
         setChance(1);
+        setData((prev) => ({ ...prev, chance: 1 }));
       }
       setSpin2(false);
     }, 300);
-    playDice();
+    if (volume) playDice();
     const n = generate();
 
     setDice2(n);
+    setData((prev) => ({ ...prev, dice2: n }));
+    setData((prev) => ({ ...prev, p2: prev.p2 + n }));
     for (let i = 1; i <= n; i++) {
       if (p2 === 100) break;
       setTimeout(() => {
@@ -130,16 +191,28 @@ const SnakeAndLadder = () => {
         }
       }, i * 300);
     }
-    setDice2(n);
     if (p2 + n >= 100) {
-      setWinner(player2Name);
+      setWinner("Player 2");
+      setData({
+        dice1: 6,
+        dice2: 6,
+        gameStarted: false,
+        winner: "",
+        chance: 1,
+        p1: 1,
+        p2: 1,
+        six: 0,
+        volume: data.volume,
+      });
       setP2(100);
       setGameStarted(false);
     }
     if (n !== 6) {
       setSix(0);
+      setData((prev) => ({ ...prev, six: 0 }));
     } else {
       setSix(six + 1);
+      setData((prev) => ({ ...prev, six: prev.six + 1 }));
     }
   };
 
@@ -147,66 +220,85 @@ const SnakeAndLadder = () => {
     setGameStarted(true);
     setP1(1);
     setP2(1);
+    setSix(0);
     setDice1(6);
     setDice2(6);
     setWinner("");
     setChance(1);
+    setData({
+      dice1: 6,
+      dice2: 6,
+      gameStarted: true,
+      winner: "",
+      chance: 1,
+      p1: 1,
+      p2: 1,
+      six: 0,
+      volume: data.volume,
+    });
   };
 
   const jump = (n, fun) => {
     switch (n) {
       case 61:
-        playSuccess();
+        if (volume) playSuccess();
         fun(82);
         break;
       case 16:
-        playSuccess();
+        if (volume) playSuccess();
         fun(46);
         break;
       case 28:
-        playSuccess();
+        if (volume) playSuccess();
         fun(74);
         break;
       case 69:
-        playSuccess();
+        if (volume) playSuccess();
         fun(91);
         break;
       case 37:
-        playSuccess();
+        if (volume) playSuccess();
         fun(58);
         break;
       case 45:
-        playSuccess();
+        if (volume) playSuccess();
         fun(64);
         break;
       case 99:
-        playSnake();
+        if (volume) playSnake();
 
         fun(77);
         break;
       case 62:
         fun(45);
-        playSnake();
+        if (volume) playSnake();
 
         break;
       case 22:
         fun(5);
-        playSnake();
+        if (volume) playSnake();
         break;
 
       case 35:
         fun(12);
-        playSnake();
+        if (volume) playSnake();
         break;
       case 87:
         fun(70);
-        playSnake();
+        if (volume) playSnake();
         break;
 
       default:
         break;
     }
   };
+
+  const toggleDark = async () => {
+    const nextTheme = theme === "light" ? "dark" : "light";
+    toggleTheme();
+    await save("theme", nextTheme);
+  };
+
   return (
     <LinearGradient colors={colors.gradients.background} style={{ flex: 1 }}>
       <StatusBar
@@ -222,7 +314,10 @@ const SnakeAndLadder = () => {
             className={`px-8 py-3  rounded text-white cursor-pointer ${
               gameStarted ? "bg-gray-400" : "bg-green-500"
             }`}
-            onPress={() => setGameStarted(true)}
+            onPress={() => {
+              setGameStarted(true);
+              setData(prev => ({ ...prev, gameStarted: true }));
+            }}
             disabled={gameStarted}
           >
             <Mid style={{ color: "white" }}>Start</Mid>
@@ -235,6 +330,33 @@ const SnakeAndLadder = () => {
             disabled={!gameStarted}
           >
             <Mid style={{ color: "white" }}>Restart</Mid>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setVolume(!volume);
+              setData((prev) => ({ ...prev, volume: !prev.volume }));
+            }}
+          >
+            {volume ? (
+              <Ionicons
+                name="volume-high-outline"
+                size={30}
+                color={colors.text}
+              />
+            ) : (
+              <Ionicons
+                name="volume-mute-outline"
+                size={30}
+                color={colors.text}
+              />
+            )}
+          </TouchableOpacity>
+          <TouchableOpacity onPress={toggleDark}>
+            {theme === "light" ? (
+              <Ionicons name="sunny-outline" size={30} color={colors.text} />
+            ) : (
+              <Ionicons name="moon-outline" size={30} color={colors.text} />
+            )}
           </TouchableOpacity>
         </View>
         <View className="flex flex-col min-w-screen justify-center items-center mt-15">
@@ -252,6 +374,7 @@ const SnakeAndLadder = () => {
               >
                 <Mid style={{ color: "white" }}>Restart</Mid>
               </TouchableOpacity>
+
               <View className="absolute">
                 <LottieView
                   source={celebrate}

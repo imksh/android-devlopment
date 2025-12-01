@@ -2,7 +2,7 @@ export const projectList = [
   {
     name: "Calculator",
     icon: "calculator",
-    img: "",
+    img: require("../assets/images/logo/calculator.png"),
     screen: "/screens/Calculator",
     type: "app",
     category: "productivity",
@@ -15,5 +15,13 @@ export const projectList = [
     screen: "/screens/SnakeAndLadder",
     type: "game",
     category: "classic",
+  },
+  {
+    name: "ToDo",
+    icon: "",
+    img: require("../assets/images/logo/todo.png"),
+    screen: "/screens/ToDo",
+    type: "app",
+    category: "productivity",
   },
 ];

@@ -10,14 +10,14 @@ import {
   Image,
 } from "react-native";
 import { useState, useEffect } from "react";
-import { Heading, Mid, Body, Caption } from "../../components/Typography";
+import { Heading, Mid, Body, Caption } from "../components/Typography";
 import { LinearGradient } from "expo-linear-gradient";
-import HomeHeader from "../../components/HomeHeader";
+import HomeHeader from "../components/HomeHeader";
 import useThemeStore from "../../store/themeStore";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { projectList } from "../../data/projects";
-import Footer from "../../components/Footer";
+import Footer from "../components/Footer";
 const projects = () => {
   const { colors, statusBarStyle } = useThemeStore();
   const [input, setInput] = useState("");
@@ -89,18 +89,18 @@ const projects = () => {
               }}
               className="flex-row gap-4 items-center "
             >
-              {item.icon !== "" ? (
+              {item.img !== "" ? (
+                <Image
+                  source={item.img}
+                  style={{ height: 70, width: 70 }}
+                  className="rounded-2xl"
+                />
+              ) : (
                 <Ionicons
                   name={item.icon}
                   size={70}
                   color={colors.primary}
                   className=""
-                />
-              ) : (
-                <Image
-                  source={item.img}
-                  style={{ height: 70, width: 70 }}
-                  className="rounded-2xl"
                 />
               )}
               <View>

@@ -9,13 +9,14 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import useThemeStore from "../../store/themeStore";
-import { Heading } from "../../components/Typography";
+import { Heading } from "../components/Typography";
 import { LinearGradient } from "expo-linear-gradient";
-import ScreenHeader from "../../components/ScreenHeader";
+import ScreenHeader from "../components/ScreenHeader";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { save } from "../../utils/storage";
 
 const Calculator = () => {
-  const { colors, statusBarStyle } = useThemeStore();
+  const { colors, statusBarStyle, theme, toggleTheme } = useThemeStore();
   const [input, setInput] = useState("");
   const [show, setShow] = useState(false);
 
@@ -38,8 +39,7 @@ const Calculator = () => {
       setInput(input.slice(0, input.length - 1));
     } else {
       setShow(false);
-      if (("*/+".includes(char) || char === "**") && input.length === 0)
-        return;
+      if (("*/+".includes(char) || char === "**") && input.length === 0) return;
       if (
         "*/+-".includes(input.charAt(input.length - 1)) &&
         "*/+".includes(char)
@@ -51,6 +51,12 @@ const Calculator = () => {
     }
   };
 
+  const toggleDark = async () => {
+    const nextTheme = theme === "light" ? "dark" : "light";
+    toggleTheme();
+    await save("theme", nextTheme);
+  };
+
   return (
     <LinearGradient colors={colors.gradients.background} style={{ flex: 1 }}>
       <StatusBar
@@ -58,7 +64,11 @@ const Calculator = () => {
         backgroundColor={Platform.OS === "android" ? colors.bg : undefined}
         animated
       />
-      <ScreenHeader name="Calculator" />
+      <ScreenHeader
+        name="Calculator"
+        icon={theme === "light" ? "sunny-outline" : "moon-outline"}
+        fun={toggleDark}
+      />
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,

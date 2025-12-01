@@ -1,20 +1,26 @@
-import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  Linking,
+} from "react-native";
 import React from "react";
-import { Mid, Body } from "./Typography";
+import { Mid, Body, Caption } from "./Typography";
 import { Ionicons } from "@expo/vector-icons";
-import useThemeStore from "../store/themeStore";
-import { useRouter } from 'expo-router';
+import useThemeStore from "../../store/themeStore";
+import { webProjects } from "../../data/webProjects";
 
-const RecentProjects = () => {
+const RecentWebProjects = () => {
   const { colors } = useThemeStore();
-  const router = useRouter();
   const data = [
     { name: "Calculator", icon: "calculator", screen: "/screens/Calculator" },
     { name: "Tempelate", icon: "apps", screen: "/apps/(template)" },
     {
       name: "Snake & Ladder",
       icon: "",
-      img: require("../assets/images/ludo/snake.png"),
+      img: require("../../assets/images/ludo/snake.png"),
       screen: "/screens/SnakeAndLadder",
       type: "game",
       category: "classic",
@@ -27,7 +33,7 @@ const RecentProjects = () => {
         style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}
         className="ml-4"
       >
-        Recent Projects
+        Web Projects
       </Mid>
 
       <ScrollView
@@ -35,13 +41,12 @@ const RecentProjects = () => {
         showsHorizontalScrollIndicator={false}
         style={{ marginTop: 10 }}
       >
-        {data.map((item, index) => (
+        {webProjects.map((item, index) => (
           <TouchableOpacity
             key={index}
-            onPress={() => router.push(item.screen)}
+            onPress={() => Linking.openURL(item.link)}
             style={{
-              width: 140,
-              aspectRatio: 1,
+              width: 240,
               padding: 15,
               borderWidth: 1,
               borderColor: colors.border,
@@ -51,29 +56,23 @@ const RecentProjects = () => {
             }}
             className="gap-1"
           >
-            {item.icon !== "" ? (
-              <Ionicons
-                name={item.icon}
-                size={40}
-                color={colors.primary}
-                className="m-auto"
-              />
-            ) : (
-              <Image
-                source={item.img}
-                style={{ height: "60%", width: "80%" }}
-                className="mx-auto"
-              />
-            )}
-            <Body
+            <Image
+              source={item.img}
+              style={{ height: 120, width: "80%" }}
+              className="mx-auto object-fit-contain"
+            />
+
+            <Mid
               style={{
                 color: colors.text,
                 fontSize: 16,
                 textAlign: "center",
               }}
             >
-              {item.name}
-            </Body>
+              {item.title}
+            </Mid>
+            <Caption style={{fontSize:13}}>{item.desc}</Caption>
+            <Caption style={{fontSize:10}}>{item.type} • {item.category}</Caption>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -81,4 +80,4 @@ const RecentProjects = () => {
   );
 };
 
-export default RecentProjects;
+export default RecentWebProjects;

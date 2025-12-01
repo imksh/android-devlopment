@@ -12,12 +12,12 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import HomeHeader from "../../components/HomeHeader";
+import HomeHeader from "../components/HomeHeader";
 import useThemeStore from "../../store/themeStore";
-import { Heading, Caption, Body, Mid } from "../../components/Typography";
+import { Heading, Caption, Body, Mid } from "../components/Typography";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import Footer from "../../components/Footer";
+import Footer from "../components/Footer";
 
 const profile = () => {
   const { colors, statusBarStyle } = useThemeStore();
@@ -72,6 +72,7 @@ const profile = () => {
             <View className="flex flex-row justify-around items-center my-8">
               <TouchableOpacity
                 onPress={() => Linking.openURL("https://github.com/imksh")}
+                className="bg-white rounded-2xl" 
               >
                 <Ionicons name="logo-github" size={40} />
               </TouchableOpacity>
@@ -79,6 +80,7 @@ const profile = () => {
                 onPress={() =>
                   Linking.openURL("https://www.linkedin.com/in/imksh3/")
                 }
+                
               >
                 <Ionicons name="logo-linkedin" size={40} color="#0077B5" />
               </TouchableOpacity>
@@ -90,11 +92,14 @@ const profile = () => {
                 <Ionicons name="logo-instagram" size={40} color="#E1306C" />
               </TouchableOpacity>
               <TouchableOpacity
-                className=" p-2 rounded-2xl"
-                style={{ backgroundColor: colors.primary }}
+                // style={{ backgroundColor: colors.primary }}
                 onPress={() => Linking.openURL("https://imksh3.netlify.app/")}
+                
               >
-                <Ionicons name="code-slash-outline" size={25} color="white" />
+                <Image 
+                  source={require("../../assets/images/logo1.png")}
+                  style={{width:40,height:40}}
+                />
               </TouchableOpacity>
             </View>
 

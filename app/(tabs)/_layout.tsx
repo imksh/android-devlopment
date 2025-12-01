@@ -41,9 +41,9 @@ const TabLayout = () => {
       <Tabs.Screen
         name="projects"
         options={{
-          title: "Projects",
+          title: "Apps",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="cube" size={size} color={color} />
+            <Ionicons name="apps" size={size} color={color} />
           ),
         }}
       />
@@ -52,7 +52,7 @@ const TabLayout = () => {
         options={{
           title: "Dashboard",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="apps" size={size} color={color} />
+            <Ionicons name="cube" size={size} color={color} />
           ),
         }}
       />

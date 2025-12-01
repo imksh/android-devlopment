@@ -1,16 +1,16 @@
 import { View, ScrollView, StatusBar, Platform, Share } from "react-native";
 import { useState } from "react";
 import useThemeStore from "../../store/themeStore";
-import { Heading } from "../../components/Typography";
+import { Heading } from "../components/Typography";
 import { LinearGradient } from "expo-linear-gradient";
-import SettingsHeader from "../../components/SettingsHeader";
+import SettingsHeader from "../components/SettingsHeader";
 import { save, remove, clear } from "../../utils/storage.ts";
-import SettingToggle from "../../components/SettingToggle";
-import SettingsOptins from "../../components/SettingsOptions";
-import CustomImage from "../../components/CustomImage";
+import SettingToggle from "../components/SettingToggle";
+import SettingsOptins from "../components/SettingsOptions";
+import CustomImage from "../components/CustomImage";
 import useLocalStore from "../../store/localStore";
-import ScreenHeader from "../../components/ScreenHeader";
-import Footer from "../../components/Footer";
+import ScreenHeader from "../components/ScreenHeader";
+import Footer from "../components/Footer";
 
 const settings = () => {
   const { colors, toggleTheme, statusBarStyle, theme, setDefault } =

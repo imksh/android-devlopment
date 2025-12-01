@@ -11,9 +11,9 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import HomeHeader from "../../../components/HomeHeader";
+import HomeHeader from "../../components/HomeHeader";
 import useThemeStore from "../../../store/themeStore";
-import { Heading,Caption,Body,Mid } from "../../../components/Typography";
+import { Heading,Caption,Body,Mid } from "../../components/Typography";
 import { useRouter } from "expo-router";
 
 const profile = () => {

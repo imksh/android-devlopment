@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TextProps } from "react-native";
-import useThemeStore from "../store/themeStore";
+import useThemeStore from "../../store/themeStore";
 
 type Props = TextProps & { children: React.ReactNode };
 

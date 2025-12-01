@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
-import { Heading, Mid, Body } from "../../../components/Typography";
+import { Heading, Mid, Body } from "../../components/Typography";
 import { LinearGradient } from "expo-linear-gradient";
-import HomeHeader from "../../../components/HomeHeader";
+import HomeHeader from "../../components/HomeHeader";
 import useThemeStore from "../../../store/themeStore";
 import { useRouter } from "expo-router";
 

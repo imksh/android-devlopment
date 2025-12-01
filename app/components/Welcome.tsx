@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 import {useState,useEffect} from "react";
 import LottieView from "lottie-react-native";
-import infinity1 from "../assets/animations/infinity1.json";
+import infinity1 from "../../assets/animations/infinity1.json";
 import { Heading, Body } from "./Typography";
-import useThemeStore from '../store/themeStore';
+import useThemeStore from '../../store/themeStore';
 
 const Welcome = () => {
   const{colors} = useThemeStore();

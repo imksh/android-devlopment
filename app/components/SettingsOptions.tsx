@@ -4,7 +4,7 @@ import { Mid } from "../components/Typography";
 import { Ionicons } from "@expo/vector-icons";
 import ConfirmationToast from "./ConfirmationToast";
 import { Portal } from "react-native-paper";
-import useThemeStore from "../store/themeStore";
+import useThemeStore from "../../store/themeStore";
 
 export default function SettingsOptins({ check, icon, fun, name, message }) {
   const [show, setShow] = useState(false);

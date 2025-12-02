@@ -24,4 +24,12 @@ export const projectList = [
     type: "app",
     category: "productivity",
   },
+  {
+    name: "MindGrid",
+    icon: "",
+    img: require("../assets/images/logo/mindGrid.png"),
+    screen: "/screens/MindGrid",
+    type: "game",
+    category: "puzzle",
+  },
 ];

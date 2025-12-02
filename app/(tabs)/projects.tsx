@@ -18,6 +18,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { projectList } from "../../data/projects";
 import Footer from "../components/Footer";
+
 const projects = () => {
   const { colors, statusBarStyle } = useThemeStore();
   const [input, setInput] = useState("");
@@ -47,7 +48,7 @@ const projects = () => {
         backgroundColor={Platform.OS === "android" ? colors.bg : undefined}
         animated
       />
-      <HomeHeader name="Projects" />
+      <HomeHeader name="App Store" />
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,

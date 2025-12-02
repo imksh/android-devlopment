@@ -15,14 +15,7 @@ import Footer from "../components/Footer";
 const settings = () => {
   const { colors, toggleTheme, statusBarStyle, theme, setDefault } =
     useThemeStore();
-  const {
-    clearAll,
-    updateData,
-    setBatsmanQueue,
-    setBowlerQueue,
-    attendance,
-    setAttendance,
-  } = useLocalStore();
+  const { clearAll } = useLocalStore();
   const [isNotification, setIsNotification] = useState(false);
   const isDark = theme === "dark";
 

@@ -1,11 +1,9 @@
 import {
   TouchableOpacity,
-  TextInput,
   View,
   Image,
   StatusBar,
   Platform,
-  KeyboardAvoidingView,
 } from "react-native";
 import { useState, useEffect } from "react";
 import { makeSnakeBoard } from "../../utils/makeSnakeBoard.ts";

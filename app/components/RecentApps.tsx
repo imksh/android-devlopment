@@ -70,6 +70,7 @@ const RecentApps = () => {
             </TouchableOpacity>
           ))}
         <TouchableOpacity
+          onPress={() => router.push("/(tabs)/projects")}
           style={{
             width: 140,
             aspectRatio: 1,

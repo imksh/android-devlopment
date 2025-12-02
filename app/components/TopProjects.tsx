@@ -9,7 +9,6 @@ const TopProjects = () => {
   const { colors } = useThemeStore();
   const router = useRouter();
   const data = [
-    { name: "Tempelate", icon: "apps", screen: "/apps/(template)", img: "" },
     {
       name: "Calculator",
       icon: "calculator",
@@ -32,6 +31,15 @@ const TopProjects = () => {
       type: "game",
       category: "classic",
     },
+    {
+      name: "MindGrid",
+      icon: "",
+      img: require("../../assets/images/logo/mindGrid.png"),
+      screen: "/screens/MindGrid",
+      type: "game",
+      category: "classic",
+    },
+    { name: "Tempelate", icon: "apps", screen: "/apps/(template)", img: "" },
   ];
 
   return (
@@ -90,6 +98,7 @@ const TopProjects = () => {
           </TouchableOpacity>
         ))}
         <TouchableOpacity
+          onPress={() => router.push("/(tabs)/projects")}
           style={{
             width: 140,
             aspectRatio: 1,

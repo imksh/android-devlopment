@@ -24,12 +24,17 @@ module.exports = {
           "0%": { transform: "rotate(0deg)"},
           "100%": { transform: "rotate(360deg)" },
         },
+        flip: {
+          "0%": { transform: "rotatey(0deg)"},
+          "100%": { transform: "rotatey(360deg)" },
+        },
       },
       animation: {
         bounce: "bounce 1s infinite",
         "float-up": "floatUp 1s ease-in-out 1s  forwards infinite",
         "dice1": "dice 0.3s ease-in-out forwards infinite",
         "dice2": "dice 0.3s ease-in-out forwards infinite",
+        "flip": "dice 0.8s ease-in-out forwards infinite",
       },
     },
   },

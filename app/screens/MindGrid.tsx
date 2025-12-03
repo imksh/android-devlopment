@@ -246,7 +246,7 @@ const MindGrid = () => {
             {x.map((item, j) => (
               <TouchableOpacity
                 key={j}
-                className={` rounded-2xl flex justify-center items-center`}
+                className={`rounded-2xl flex justify-center items-center`}
                 style={{
                   width: 70,
                   height: 70,
@@ -259,7 +259,7 @@ const MindGrid = () => {
                       : "#9CA3AF",
                 }}
                 onPress={() => handle(item)}
-                disabled={isProgress}
+                disabled={isProgress || item.isSelected}
               >
                 <Heading style={{ color: "white" }}>
                   {item.isSelected && item.digit}
